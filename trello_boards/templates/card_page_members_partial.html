@@ -1,0 +1,15 @@
+{% if card.if_owner_is_membership %}
+	<a class="member-avatar">{{ card.list_name.board.user.username.0|title }}</a>
+	<input type="hidden" name="user_id" value="{{ card.list_name.board.user.id }}">
+{% endif %}
+
+{% if card.get_all_card_memberships|length != 0 %}
+	{% for membership in card.get_all_card_memberships %}
+		<a class="member-avatar" style="background-color: {{membership.background_color_code}}">{{ membership.member.username.0|title }}</a>
+		<input type="hidden" name="user_id" value="{{ membership.member.id }}">
+	{% endfor %}
+{% endif %}
+
+<a href="#" class="add-button add-member-button">+</a>
+
+

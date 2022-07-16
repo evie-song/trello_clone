@@ -1,0 +1,43 @@
+<div class="card-detail-item members {% if card_memberships|length == 0 %}hide{% endif %}">
+	<h3>Members</h3>
+	<div class="card-detail-item-content">
+		{% include "card_page_members_partial.html" %}
+	</div>
+</div>	
+
+<div class="card-detail-item labels {% if card_labels|length == 0 %}hide{% endif %}">
+	<h3>Labels</h3>
+	<div class="card-detail-item-content">
+		{% for label in card_labels %}
+			{% include "card_page_label_partial.html" %}
+		{% endfor %}
+		<a href="#" class="add-button add-label-button">+</a>
+	</div>
+</div>
+
+<div class="card-detail-item due-dates {% if card.due_date == None %}hide{% endif %}">
+	<h3>Due date</h3>
+	<div class="card-detail-item-content">
+		<div class="card-detail-due-date-badge">
+			<form class="due-date-checkbox-form">
+				<input type="checkbox" name="checkbox" {%if card.due_date_completed == True%}checked{% endif %}>
+				<button class="due-date-edit-button">
+					<span>{{ card.due_date|date:"M j y" }} at {{ card.due_date|date:"g:i A" }}</span>
+					<span class="due-reminder 
+						{% if card.due_date_completed == True %}due-date-completed
+						{% elif card.is_past_due %}past-due
+						{% elif card.is_due_soon %}due-soon
+						{% endif %}">
+						{% if card.due_date_completed == True %}complete
+						{% elif card.is_past_due %}overdue
+						{% elif card.is_due_soon %}due soon
+						{% endif %}
+					</span>
+					<span class="material-icons drop-arrow medium">&#xe313;</span>
+				</button>
+			</form>
+		</div>
+	</div>
+</div>
+
+<div class="spacer" style="clear: both;"></div>

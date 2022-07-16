@@ -1,0 +1,40 @@
+{% extends "./login_base.html" %}
+
+{% block content %}
+
+	<div class="sign-up-message">
+		<h5>Log in to Trello</h5>
+	</div>
+
+
+	<form class='sign-up-form' method="post" action="{% url 'users:login' %}">
+		{% csrf_token %}
+
+		<!-- {{form.as_p}} -->
+
+		<div>
+			<input name="{{ form.username.name }}" class="form-control"  type="text" value="{{ form.username.value|default_if_none:'' }}" placeholder="Enter username">
+		</div>
+
+		<div>
+			<input type="password" name ="{{ form.password.name }}" class="form-control" placeholder="Enter password" required>
+		</div>
+
+		<div class="error-message">
+			{% if form.errors %}
+				<p>Your username and passwork didn't match. Please try again</p>
+			{% endif %}
+		</div>
+
+		<div>
+			<button name="submit">Log in</button>
+		</div>
+		
+		<input type="hidden" name="next" value="{% url 'trello_boards:index' %}">
+
+	</form>
+
+	<a class="sign-up-log-in-switch" href="{% url 'users:register' %}">Don't have an account? Sign up for an account</a>
+
+{% endblock content %}
+

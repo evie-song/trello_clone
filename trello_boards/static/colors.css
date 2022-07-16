@@ -1,0 +1,87 @@
+/*css rules for backgroundcolors*/
+
+.board-page.green-background,
+.board-color-icon.green-background,
+.board-background-icon[data-color="green"],
+.board-item.green-background {
+	background-color: rgb(75 191 107);
+}
+
+.board-page.orange-background,
+.board-color-icon.orange-background,
+.board-background-icon[data-color="orange"],
+.board-item.orange-background {
+	background-color: #d29034;
+}
+
+.board-page.blue-background,
+.board-color-icon.blue-background,
+.board-background-icon[data-color="blue"],
+.board-item.blue-background {
+	background-color: #0079bf;
+}
+
+.board-page.red-background,
+.board-color-icon.red-background,
+.board-background-icon[data-color="red"],
+.board-item.red-background {
+	background-color: #b04632;
+}
+
+.board-page.purple-background,
+.board-color-icon.purple-background,
+.board-background-icon[data-color="purple"],
+.board-item.purple-background {
+	background-color: #89609e;
+}
+
+.board-page.pink-background,
+.board-color-icon.pink-background,
+.board-background-icon[data-color="pink"],
+.board-item.pink-background {
+	background-color: #cd5a91;
+}
+
+
+.board-page,
+.board-color-icon,
+.board-item {
+	 background-color: #b2c0c8;
+}
+
+.board-page .header {
+	background: linear-gradient(rgba(0, 0, 0, 0.15), rgba(0, 0, 0, 0.15));
+}
+
+.sidebar {
+	background: linear-gradient(rgba(0, 0, 0, 0.15), rgba(0, 0, 0, 0.15));
+}
+
+.sidebar-item.selected-board {
+	background: linear-gradient(rgba(255, 255, 255, 0.30), rgba(255, 255, 255, 0.30));
+}
+
+.header-button:hover,
+.create-button:hover,
+.search-bar-wrapper:hover,
+.material-icons.info-icon:hover,
+.material-icons.notification-icon:hover,
+.home-button:hover,
+.switch-button:hover,
+.sidebar-item:hover,
+.board-header-button:hover,
+.board-header-button.board-title:hover,
+.list-wrapper.empty:hover {
+	background: linear-gradient(rgba(255, 255, 255, 0.30), rgba(255, 255, 255, 0.30));
+}
+
+.board-header-button,
+.list-wrapper.empty {
+	background: linear-gradient(rgba(255, 255, 255, 0.20), rgba(255, 255, 255, 0.20));
+}
+
+.search-bar-wrapper,
+.create-button {
+	background: linear-gradient(rgba(255, 255, 255, 0.20), rgba(255, 255, 255, 0.20));
+}
+

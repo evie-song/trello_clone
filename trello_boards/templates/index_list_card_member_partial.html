@@ -1,0 +1,9 @@
+{% if card.if_owner_is_membership %}
+	<div class="member-icon">{{ card.list_name.board.user.username.0|title }}</div>
+{% endif %}
+
+{% if card.get_all_card_memberships|length != 0 %}
+	{% for membership in card.get_all_card_memberships %}
+		<div class="member-icon" style="background-color: {{membership.background_color_code}}">{{ membership.member.username.0|title }}</div>
+	{% endfor %}
+{% endif %}

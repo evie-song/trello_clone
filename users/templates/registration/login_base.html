@@ -1,0 +1,36 @@
+{% load static %}
+
+<!DOCTYPE html>
+<html>
+<head>
+	<meta charset="utf-8">
+	<meta name="viewport" content="width=device-width, initial-scale=1">
+	<link rel="stylesheet" type="text/css" href="{% static 'sum.css' %}">
+	<link href="https://fonts.googleapis.com/icon?family=Material+Icons" rel="stylesheet">
+	<link rel="stylesheet" href="//code.jquery.com/ui/1.13.1/themes/base/jquery-ui.css">
+	<link rel=”stylesheet” href=”//code.jquery.com/ui/1.12.1/themes/smoothness/jquery-ui.css”>
+	<title></title>
+</head>
+<body>
+
+	<div class="login-header">
+		Trello
+	</div>
+
+	<div class="login-main">
+		{% block content %}
+
+		{% endblock content %}
+	</div>
+
+<div class="login-footer"></div>
+
+	<script type="text/javascript" src="{% static 'jquery-3.6.0.min.js' %}"></script>
+	<script type="text/javascript" src="{% static 'card.js' %}"></script>
+	<script src="https://code.jquery.com/ui/1.13.1/jquery-ui.js"></script>
+	<script src=”//code.jquery.com/ui/1.12.1/jquery-ui.js”></script>
+	<script src=”//code.jquery.com/jquery-1.12.4.js”></script>
+</body>
+</html>
+
+

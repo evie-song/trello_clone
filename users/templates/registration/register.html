@@ -1,0 +1,58 @@
+{% extends "./login_base.html" %}
+
+{% block content %}
+
+	<div class="sign-up-message">
+		<h5>Sign up for your account</h5>
+	</div>
+
+	<form class='sign-up-form' method="post" action="{% url 'users:register' %}">
+		{% csrf_token %}
+
+		<!-- {{form.as_p}} -->
+
+		<div>
+			<input name="{{ form.username.name }}" class="form-control"  type="text" value="{{ form.username.value|default_if_none:'' }}" placeholder="Enter username">
+		</div>
+
+		<div>
+			<input name="{{ form.email.name }}" class="form-control"  type="text" value="{{ form.email.value|default_if_none:'' }}" placeholder="Enter email">
+		</div>
+
+		<div>
+			<input type="password" name ="{{ form.password1.name }}" class="form-control" placeholder="Password" required>
+		</div>
+
+		<div>
+			<input type="password" name ="{{ form.password2.name }}" class="form-control" placeholder="Confirm password" required>
+		</div>
+
+		<div class="error-message">
+			{% if form.errors %}
+			    {% for field in form %}
+			        {% for error in field.errors %}
+			            <p>
+			            	<span class="warning">!</span>
+			            	{{ error }} 
+			            </p>
+			        {% endfor %}
+			    {% endfor %}
+			{% endif %}
+		</div>
+
+		<div>
+			<button name="submit">Register</button>
+		</div>
+		
+		<!-- <input type="hidden" name="next" value="{% url 'trello_boards:index' %}">	 -->
+
+	</form>
+
+	<a class="sign-up-log-in-switch" href="{% url 'users:login' %}">Already have an account? Log in</a>
+
+
+{% endblock content %}
+
+		
+		
+

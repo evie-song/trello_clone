@@ -1,0 +1,16 @@
+<div class="pop-over-header">
+	<span class="pop-over-header-title">Members</span>
+	<span class="icon-sm material-icons pop-over-close-icon">&#xe5cd;</span>	
+</div>
+<div class="pop-over-content">
+	<label class="edit-label-title">Board members</label>
+	<input type="hidden" name="card_id" value="{{ card.id }}">
+		{% for member in all_members %}
+			<a href="#" class="select-member">
+				<input type="hidden" name="user_id" value="{{ member.member.id }}">
+				<span class="member-avatar" style="background-color: {{member.background_color}}" href="#">{{ member.member.username.0|title }}</span>
+				<span class="member-username">{{ member.member.username }}</span>
+				<span class="icon-sm material-icons member-check-icon {% if member.status is True %}icon-show{% endif %}">&#xe5ca;</span>
+			</a>
+		{% endfor %}
+</div>

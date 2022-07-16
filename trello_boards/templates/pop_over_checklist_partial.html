@@ -1,0 +1,13 @@
+<div class="pop-over-header">
+	<span class="pop-over-header-title">Add checklist</span>
+	<span class="icon-sm material-icons pop-over-close-icon">&#xe5cd;</span>	
+</div>
+<div class="pop-over-content">
+	<form class="checklist-form" action="new_checklist" method="post">
+		{% csrf_token %}
+		<input type="hidden" name="card_id" value="{{ card.id }}">
+		<label>Title</label>
+		<input type="text" name="name" class="checklist-title" value="Checklist">
+		<input class="save-btn checklist-save-btn" type="submit" name="submit" value="Add">
+	</form>
+</div>

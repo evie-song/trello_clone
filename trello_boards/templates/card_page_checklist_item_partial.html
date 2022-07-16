@@ -1,0 +1,14 @@
+<div class="checklist-item-wrapper">
+	<div class="checklist-item">
+		<form class="checkbox-form">
+			<input type="hidden" name="checklist_item_id" value="{{ item.id }}">
+			{% if item.checked == True %}
+				<input type="checkbox" name="checkbox-1" checked>
+			{% else %}
+				<input type="checkbox" name="checkbox-1">
+			{% endif %}
+			<input type="hidden" name="checkbox_status" value="{{ item.checked }}">
+		</form>
+		<span class="checklist-item-title {% if item.checked == True %}item-checked{% endif %}">{{ item }}</span>
+	</div>
+</div>

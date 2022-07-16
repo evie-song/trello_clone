@@ -1,0 +1,24 @@
+<div class="list-card" id="card_id_{{ card.id }}">
+	<div class="list-card-label">
+		{% for label in card.label_set.all %}
+			{% if label.label_selected == True %}
+				{% include "index_list_card_label_partial.html" %}
+			{% endif %}
+		{% endfor %}
+	</div>
+	<div class="list-card-title">{{ card.card_title }}</div>
+	<div class="list-card-footer">
+		<div class="card-footer-container">
+			<div class="card-footer-due-date">
+				{% include "index_list_card_due_date_partial.html" %}
+			</div>
+			<div class="card-footer-checklist">
+				{% include "index_list_card_checklist_partial.html" %}
+			</div>
+			
+		</div>
+			<div class="member-icon-container">
+				{% include "index_list_card_member_partial.html" %}
+			</div>
+	</div>
+</div> 

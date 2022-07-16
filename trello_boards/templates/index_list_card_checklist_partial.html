@@ -1,0 +1,4 @@
+{% if card.get_total_checklist_item != 0 %}
+	<span class="material-icons small front-icon">&#xe834;</span>
+	<span>{{ card.get_checked_checklist_item }}/{{ card.get_total_checklist_item }}</span>
+{% endif %}

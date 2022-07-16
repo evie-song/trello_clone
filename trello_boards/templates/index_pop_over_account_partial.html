@@ -1,0 +1,11 @@
+<div class="pop-over-header">
+	<span class="pop-over-header-title">Account</span>
+	<span class="icon-sm material-icons pop-over-close-icon">&#xe5cd;</span>	
+</div>
+<div class="pop-over-content">
+	<div class="account-info">
+		<span class="member-avatar"href="#">{{ user.username.0|title }}</span>
+		<span class="member-username">{{ user.username }}</span>
+	</div>
+	<a class="log-out-btn" href="{% url 'users:logout' %}">Log out</a>
+</div>

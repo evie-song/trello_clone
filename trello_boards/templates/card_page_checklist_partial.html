@@ -1,0 +1,35 @@
+<div class="card-checklist-wrapper">
+	<div class="main-col-indent main-col-title">
+		<span class="icon-lg main-col-header-icon material-icons">&#xe834;</span>	
+		<h2>{{ checklist}}</h2>
+		<div class="main-col-title-options">
+			<a class="title-option-item" rel="#" href="#">Show checked items</a>
+			<a class="title-option-item delete-checklist-btn"rel="#" href="#">Delete</a>
+		</div>					
+	</div>
+	<div class="main-col-indent checklist-progress-bar">
+		<span class="checklist-progress-number">
+			{{ checklist.get_checked_percentage }}%
+		</span>
+		<div class="background-color {% if checklist.get_checked_percentage == 100 %}progress-full{% endif %}" style="width:
+		{{checklist.get_checked_percentage}}% ;"></div>
+	</div>
+	<div class="checklist-progress-item-list">
+		{% for item in checklist.checklistitem_set.all %}
+			{% include "card_page_checklist_item_partial.html" %}
+		{% endfor %}
+	</div>
+	<div class="main-col-indent checklist-new-item">
+		<a class="title-option-item add-new-checklist-item-btn" rel="#" href="#">Add an item</a>
+		
+		<form class="checklist-item-form" action="/new_checklist_item" method="post">
+			<input type="hidden" name="checklist_id" value="{{ checklist.id }}">
+			<textarea class="checklist-item-input-box" name="name" placeholder="Add an item"></textarea>
+			<div class="checklist-item-footer">
+				<input class="checklist-item-save-btn" type="submit" name="submit" value="Save">
+				<span class="icon-lg material-icons new-checklist-item-clear-btn">&#xe14c;</span>
+			</div>
+		</form>
+		<div class="spacer" style="clear: both;"></div>
+	</div>
+</div>		

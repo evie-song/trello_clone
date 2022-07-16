@@ -1,0 +1,10 @@
+{% if card.due_date != null %}
+	<div class="due-date-container 
+		{% if card.due_date_completed == True %}due-date-completed
+		{% elif card.is_past_due %}past-due
+		{% elif card.is_due_soon %}due-soon
+		{% endif %}">
+		<span class="material-icons small">&#xe192;</span>
+		<span>{{ card.due_date|date:"M j" }}</span>
+	</div>
+{% endif %}

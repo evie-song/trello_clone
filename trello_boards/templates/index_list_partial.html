@@ -1,0 +1,33 @@
+<div class="list-wrapper">
+	<div class="list-content">
+		<div class="list-header">
+			<div class="list-title">{{ list.list_title }}</div>
+			<a class="material-icons list-header-icon" href="#">&#xe5d2;</a>
+		</div>
+		<div class="card-collection">
+			{% for card in list.get_cards_in_order %}
+				{% include "index_list_card_partial.html" %}
+			{% endfor %}
+		</div>
+		<div class="card-composer-container">
+			<a class="open-card-composer" href="#">
+				<span class="material-icons front-icon large">&#xe145;</span>
+				<span class="card-composer-title">Add a card</span>
+				<button>
+					<span class="material-icons small">&#xe161;</span>
+				</button>
+			</a>
+			<form action="{% url 'trello_boards:new_card' %}" method="post" class="new-card-form">
+				{% csrf_token %}
+				<input type="hidden" name="list_id" value="{{ list.id }}">
+				<textarea class="list-card-composer-textarea new-card-name" name="new_card_name" placeholder="Enter card title..."></textarea>
+				<div class="new-card-submit submit-control">
+					<input class="submit-control-btn" type="submit" value="Submit">
+					<span class="material-icons icon-lg new-card-clear-icon">&#xe14c;</span>
+				</div>
+			</form>
+		</div>
+	</div>
+</div>
+
+

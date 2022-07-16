@@ -1,0 +1,177 @@
+<div class="card-page-overlay">
+<div class="window" id='card_page_card_id_{{ card.id }}'>
+	<div class="window-header">
+		<span class="icon-lg window-header-icon material-icons">&#xe8f7;</span>					
+		<h1 class="card_page_title" contenteditable="true">{{ card.card_title }}</h1>
+		<p>
+			<span>in list 
+				<a class="list-name" href="#">To Do</a>
+				<span class="material-icons icon-tiny">&#xe417;</span>
+			</span>
+		</p>
+		<span class="icon-lg material-icons close-icon">&#xe5cd;</span>		
+	</div>
+
+	<div class="window-main-col">
+		<div class="card-detail-module card-detail-data main-col-indent">
+
+			{% include "card_page_detail_data_partial.html" %}
+			
+			
+		</div>
+
+		<div class="card-detail-module card-description">
+			<div class="main-col-indent main-col-title description">
+				<span class="icon-lg main-col-header-icon material-icons">&#xe236;</span>	
+				<h2>Description</h2>
+				<button class="description-edit-button {% if card.card_description %}btn-show{% endif %}">Edit</button>
+			</div>
+			<div class="description-input main-col-indent">
+				<form class="card-description-form" action="/card_description_edit" method="post">
+					{% csrf_token %}
+					<input type="hidden" name="card_id" value="{{ card.id }}">
+					<textarea class="description-input-box" name="description_content" placeholder="Add a more detailed description...">{{ card.card_description }}</textarea>
+					<div class="description-footer">
+						<div class="description-control">
+							<input class="description-save-btn" type="submit" name="card-description-submit" value="Save">
+							<button class="icon-lg material-icons">&#xe14c;</button>
+						</div>
+						<button class="format-helper">Formatting help</button>	
+					</div>
+				</form>
+				
+			</div>
+		</div>
+
+		<div class="card-detail-module card-checklist">
+			{% for checklist in card_checklists %}
+				{% include "card_page_checklist_partial.html" %}
+			{% endfor %}
+		</div>
+
+		<div class="card-detail-module card-activity">
+			<div class="main-col-indent main-col-title">
+				<span class="icon-lg main-col-header-icon material-icons">&#xe241;</span>	
+				<h2>Activity</h2>	
+				<div class="main-col-title-options">
+					<a class="title-option-item" rel="" href="">Show details</a>
+				</div>				
+			</div>
+			<div class="comment-input main-col-indent">
+				<span class="member-avatar"href="#">ES</span>
+				<form>
+					<textarea class="comment-input-box" placeholder="Write a comment..."></textarea> 
+				</form>
+				<div class="comment-input-footer">
+					<div class="comment-control">
+						<button class="comment-save-btn">Save</button>
+					</div>
+					<div class="comment-options">
+						<span class="icon-sm material-icons">&#xe226;</span>
+						<span class="icon-sm material-icons">&#xe80d;</span>
+						<span class="icon-sm material-icons">&#xe420;</span>
+						<span class="icon-sm material-icons">&#xe161;</span>
+					</div>
+				</div>
+			</div>
+		</div>
+	</div>
+	<div class="window-sidebar">
+		<div class="sidebar-module">
+			<h3>Add to card</h3>
+			<div class="card-detail-edit">
+				<a class="button-link add-members-menu" href="#">
+					<span class="icon-sm material-icons">&#xe7ff;</span>
+					<span class="sidebar-action-text">Members</span>
+				</a>
+				<a class="button-link add-label-menu" href="#">
+					<span class="icon-sm material-icons">&#xe892;</span>
+					<span class="sidebar-action-text">Labels</span>
+				</a>
+				<a class="button-link add-checklist-menu" href="#">
+					<span class="icon-sm material-icons">&#xe834;</span>
+					<span class="sidebar-action-text">Checklist</span>
+				</a>
+				<a class="button-link add-date-menu" href="#">
+					<span class="icon-sm material-icons">	&#xe422;</span>
+					<span class="sidebar-action-text">Dates</span>
+				</a>
+				<a class="button-link" href="#">
+					<span class="icon-sm material-icons">	&#xe226;</span>
+					<span class="sidebar-action-text">Attachment</span>
+				</a>
+				<a class="button-link" href="#">
+					<span class="icon-sm material-icons">&#xe410;</span>
+					<span class="sidebar-action-text">Cover</span>
+				</a>
+				<a class="button-link" href="#">
+					<span class="icon-sm material-icons">&#xe866;</span>
+					<span class="sidebar-action-text">Custom Fields</span>
+				</a>
+				<div class="free-trail-container">
+					<p class="desc-grey">Add dropdowns, text fields, dates, and more to your cards.</p>
+					<a href="#" class="free-trial-button">
+						<span class="icon-tiny material-icons icon-free-trial">&#xe8f6;</span>
+						<span>Start free trial</span>
+					</a>
+					
+				</div>
+			</div>
+		</div>
+
+		<div class="sidebar-module">
+			<h3>Power-ups</h3>
+			<div class="card-detail-plugin">
+				<a class="button-link add-button-link" href="#">
+					<span class="add-button-link-text">Add Power-Ups</span>
+				</a>
+			</div>
+		</div>
+
+		<div class="sidebar-module">
+			<div class="sidebar-title">
+				<h3>Automation</h3>
+				<a href="" class="material-icons icon-tiny icon-about">&#xe417;</a>
+			</div>
+			<div class="card-detail-automation">
+				<a class="button-link add-button-link" href="#">
+					<span class="add-button-link-text">Add button</span>
+				</a>
+			</div>
+		</div>
+
+		<div class="sidebar-module">
+			<h3>Actions</h3>
+			<div class="card-detail-actions">
+				<a class="button-link" href="#">
+					<span class="icon-sm material-icons">	&#xe5c8;</span>
+					<span class="sidebar-action-text">Move</span>
+				</a>
+				<a class="button-link" href="#">
+					<span class="icon-sm material-icons">&#xe14d;</span>
+					<span class="sidebar-action-text">Copy</span>
+				</a>
+				<a class="button-link" href="#">
+					<span class="icon-sm material-icons">	&#xe431;</span>
+					<span class="sidebar-action-text">Make template</span>
+				</a>
+				<a class="button-link" href="#">
+					<span class="icon-sm material-icons">	&#xe417;</span>
+					<span class="sidebar-action-text">Watch</span>
+				</a>
+				<hr>
+				<a class="button-link remove-card-menu" href="#">
+					<span class="icon-sm material-icons">&#xe149;</span>
+					<span class="sidebar-action-text">Archive</span>
+				</a>
+				<a class="button-link" href="#">
+					<span class="icon-sm material-icons">&#xe80d;</span>
+					<span class="sidebar-action-text">Share</span>
+				</a>
+			</div>
+		</div>
+	</div>
+	<div class="spacer" style="clear: both;"></div>
+
+</div>
+</div>

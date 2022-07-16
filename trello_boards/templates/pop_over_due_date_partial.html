@@ -1,0 +1,15 @@
+<div class="pop-over-header">
+	<span class="pop-over-header-title">Dates</span>
+	<span class="icon-sm material-icons pop-over-close-icon">&#xe5cd;</span>	
+</div>
+<div class="pop-over-content">
+	<form class="due-date-form" action="" method="post">
+		{% csrf_token %}
+		<input type="hidden" name="card_id" value="{{ card.id }}">
+		<label>Due date</label>
+		<input class="due-date-input dates" type="text" id="datepicker" placeholder="MM/DD/YYYY">
+		<input class="due-date-input time" type="text" value="1:26 PM" placeholder="Add time">
+		<input class="save-btn due-dates-save-btn" type="submit" name="submit-save" value="Save">
+		<input class="save-btn due-dates-remove-btn" type="submit" name="submit-remove" value="Remove">
+	</form>
+</div>

@@ -1,0 +1,35 @@
+<div class="pop-over-header">
+	<span class="pop-over-header-title">Create board</span>
+	<span class="icon-sm material-icons pop-over-close-icon">&#xe5cd;</span>	
+</div>
+<div class="pop-over-content">
+	<form class="new-board-form" action="" method="post">
+		{% csrf_token %}
+		<input type="hidden" name="user_id" value="{{ user.id }}">
+		<label>Board title</label>
+		<input type="text" name="name" class="new-board-title">
+		<label>Background</label>
+		<div class="background-color-collection">
+			<div class="board-background-icon" data-color="green">
+				<span class="icon-sm material-icons color-check-icon">&#xe5ca;</span>
+			</div>
+			<div class="board-background-icon" data-color="blue">
+				<span class="icon-sm material-icons color-check-icon">&#xe5ca;</span>
+			</div>
+			<div class="board-background-icon" data-color="purple">
+				<span class="icon-sm material-icons color-check-icon">&#xe5ca;</span>
+			</div> 
+			<div class="board-background-icon" data-color="red">
+				<span class="icon-sm material-icons color-check-icon">&#xe5ca;</span>
+			</div>
+			<div class="board-background-icon" data-color="pink">
+				<span class="icon-sm material-icons color-check-icon">&#xe5ca;</span>
+			</div>
+			<div class="board-background-icon" data-color="orange">
+				<span class="icon-sm material-icons color-check-icon">&#xe5ca;</span>
+			</div>
+		</div>
+		
+		<input class="save-btn new-board-create-btn" type="submit" name="submit-create" value="Create">
+	</form>
+</div>
