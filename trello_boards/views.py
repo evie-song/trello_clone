@@ -23,13 +23,17 @@ import random
 # from django.template import RequestContext
 
 
+
 # Create your views here.
 @login_required(login_url='/users/login/')
 def index(request):
-	board = get_object_or_404(Board, id=1)
-	user = User.objects.get(id=board.user_id)
-	lists = get_list_or_404(List)
-	return render(request, "index_boards_partial.html", {'board': board, 'lists': lists, 'user': user})
+	user = request.user
+	return render(request, "index_boards_partial.html", {'user': user})
+
+	# board = get_object_or_404(Board, id=1)
+	# user = User.objects.get(id=board.user_id)
+	# lists = get_list_or_404(List)
+	# return render(request, "index_boards_partial.html", {'board': board, 'lists': lists, 'user': user})
 
 @login_required(login_url='/users/login/')
 def board_page(request, board_id):
@@ -387,7 +391,8 @@ def render_pop_over_new_board(request):
 
 def new_board(request):
 	if request.method == 'POST':
-		user_id = int(request.POST['user_id'])
+		user_id = request.user.id
+		# user_id = int(request.POST['user_id'])
 		board_title = request.POST.get('board_title')
 		board_background_color = request.POST.get('board_color')
 		new_board = Board()

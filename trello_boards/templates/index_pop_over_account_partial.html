@@ -7,5 +7,5 @@
 		<span class="member-avatar"href="#">{{ user.username.0|title }}</span>
 		<span class="member-username">{{ user.username }}</span>
 	</div>
-	<a class="log-out-btn" href="{% url 'users:logout' %}">Log out</a>
+	<a class="log-out-btn" href="{% url 'users:logout' %}?next={% url 'users:login' %}">Log out</a>
 </div>

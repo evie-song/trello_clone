@@ -17,8 +17,10 @@ def register(request):
 		if form.is_valid():
 			new_user = form.save()
 			login(request, new_user)
-			# return redirect('trello_boards:index')
+			return redirect('trello_boards:index')
 
 	context = {'form': form}
 	return render(request, 'registration/register.html', context)
+
+	
 

@@ -142,11 +142,14 @@
 		<div class="boards-body">
 			<div class="board-list-container">
 				<div class='board-container empty'>
-					<a class="board-link" href="">
+					<a class="board-link new-board-menu" href="#">
 						<div class="board-item">
 							Create new board
 						</div>
 					</a>
+					<input type="hidden" name="user_id" value="{{ user.id }}">
+					
+
 				</div>
 
 				{% for board in user.board_set.all %}

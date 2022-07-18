@@ -33,6 +33,7 @@ urlpatterns = [
     path('render_pop_over_account', views.render_pop_over_account, name='render_pop_over_account'),
     path('board/render_pop_over_new_board', views.render_pop_over_new_board, name='render_pop_over_new_board'),
     path('board/new_board', views.new_board, name='new_board'),
+    path('new_board', views.new_board, name='new_board'),
     path('board/render_pop_over_list_menu', views.render_pop_over_list_menu, name='render_pop_over_list_menu'),
     path('board/delete_list', views.delete_list, name='delete_list'),
     path('render_pop_over_new_board', views.render_pop_over_new_board, name='render_pop_over_new_board'),

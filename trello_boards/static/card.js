@@ -194,7 +194,6 @@ $(document).ready(function() {
 	$(document).on('click', '.board > *', (e)=>{
 		e.stopPropagation()
 		e.stopImmediatePropagation()
-		console.log('.board > *', e.target)
 	})
 
 	$(document).on("click", ".new-list-clear-icon", function(){
@@ -527,17 +526,20 @@ $(document).ready(function() {
 	})
 
 	// render account/new board/remove list pop over window. 
-	$(document).on('click', '.member-icon.account-menu, .sidebar-module-header .new-board-menu, .list-header-icon', function(event){
+	$(document).on('click', '.member-icon.account-menu, .new-board-menu, .list-header-icon', function(event){
 		event.preventDefault()
 		const $btnSelected = $(this)
-		
 		const csrftoken = getCookie("csrftoken")
 
-		const position = $(this).position()
-		let positionLeft = position.left
-		let positionTop = position.top
+		let position = $(this).position()
+		let positionLeft, positionTop
+	
+		positionLeft = position.left
+		positionTop = position.top
+		
 		let url, data
 		const userId = $(this).siblings('input[name=user_id]').val()
+		console.log(positionLeft, positionTop)
 
 		if ($btnSelected.hasClass('account-menu')) {
 			url = 'render_pop_over_account'
@@ -573,12 +575,24 @@ $(document).ready(function() {
 					})
 				}
 
-				if (($btnSelected.hasClass('new-board-menu')) || ($btnSelected.hasClass('list-header-icon'))) {
+				if ($btnSelected.hasClass('list-header-icon')) {
+					position = $btnSelected.offset()
+					console.log(position.left, position.top)
+					$popOver.css({
+						"left": position.left +24,
+						"top": position.top +24
+					})
+				}
+
+				if (($btnSelected.hasClass('new-board-menu')) && ($btnSelected.hasClass('board-link'))) {
+					$popOver.css({
+						"left": positionLeft + 100,
+						"top": positionTop + $btnSelected.height - 20
+					})
+				} else if ($btnSelected.hasClass('new-board-menu')) {
 					$popOver.css({
 						"left": positionLeft + 24,
 						"top": positionTop + 24
-						// "left": positionLeft + $popOver.width(),
-						// "top": positionTop + $popOver.height()/2 + 32
 					})
 				}
 
@@ -651,10 +665,17 @@ $(document).ready(function() {
 			success: function (data) {
 				console.log('test')
 				$popOver.html(data.html)
-				$popOver.css({
-					"left": positionLeft,
-					"top": positionTop + 48
-				})
+				if ($btnSelected.hasClass("remove-card-menu")) {
+					$popOver.css({
+						"left": positionLeft ,
+						"top": positionTop -170
+					})
+				} else {
+					$popOver.css({
+						"left": positionLeft,
+						"top": positionTop + 48
+					})
+				}
 
 				// test code for the date pick. 
 				$popOver.show()
