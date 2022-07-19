@@ -145,8 +145,10 @@ class ChecklistItem(models.Model):
 
 
 class Label(models.Model):
+	# board = models.ForeignKey(Board, on_delete=models.CASCADE)
 	card_name = models.ForeignKey(Card, on_delete=models.CASCADE)
 	label_title = models.CharField(max_length=200)
+	label_custom_title = models.CharField(max_length=200, blank=True)
 	label_selected = models.BooleanField(default=False)
 	date_created = models.DateTimeField(auto_now_add=True)
 
