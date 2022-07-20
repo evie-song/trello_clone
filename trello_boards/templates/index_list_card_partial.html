@@ -1,6 +1,6 @@
 <div class="list-card" id="card_id_{{ card.id }}">
 	<div class="list-card-label">
-		{% for label in card.cardlabel_set.all %}
+		{% for label in card.get_labels_in_order %}
 				{% include "index_list_card_label_partial.html" %}
 		{% endfor %}
 	</div>

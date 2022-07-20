@@ -933,8 +933,10 @@ $(document).ready(function() {
 				xhr.setRequestHeader("X-CSRFToken", csrftoken);
 			},
 			success: function (data) {
-				$('.labels .add-button.add-label-button').before(data.card_label_html)
-				$('.list-card[id="' + cardIdName + '"]').find(".list-card-label").append(data.index_label_html)
+				if (labelChecked == "true") {
+					$('.card-detail-module.card-detail-data').html(data.card_page_detail_html)
+					$('.list-card[id="' + cardIdName + '"]').replaceWith(data.index_card_html)
+				}
 			},
 			error: function (error) {
 	            console.log(error);

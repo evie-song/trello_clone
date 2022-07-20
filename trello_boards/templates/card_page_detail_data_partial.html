@@ -1,14 +1,14 @@
-<div class="card-detail-item members {% if card_memberships|length == 0 %}hide{% endif %}">
+<div class="card-detail-item members {% if not card.get_all_card_memberships and not card.if_owner_is_membership %}hide{% endif %}">
 	<h3>Members</h3>
 	<div class="card-detail-item-content">
 		{% include "card_page_members_partial.html" %}
 	</div>
 </div>	
 
-<div class="card-detail-item labels {% if card_labels|length == 0 %}hide{% endif %}">
+<div class="card-detail-item labels {% if not card.get_labels_in_order %}hide{% endif %}">
 	<h3>Labels</h3>
 	<div class="card-detail-item-content">
-		{% for label in card_labels %}
+		{% for label in card.get_labels_in_order %}
 			{% include "card_page_label_partial.html" %}
 		{% endfor %}
 		<a href="#" class="add-button add-label-button">+</a>

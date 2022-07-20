@@ -54,7 +54,7 @@ def new_list(request):
 		new_list.board_id= int(request.POST['board_id'])
 		new_list.save()
 
-		# upcate list_order attribute of the board.
+		# update list_order attribute of the board.
 		board = new_list.board
 		board.list_order += (str(new_list.id) + ',')
 		board.save()
@@ -85,13 +85,12 @@ def card_page(request):
 		card_id = int(request.POST.get('id'))
 		card_selected = Card.objects.get(id=card_id)
 		card_checklists = card_selected.checklist_set.all()
-		card_labels = card_selected.cardlabel_set.all()
+		card_labels = card_selected.get_labels_in_order()
 		if CardMembership.objects.filter(card_id=card_id).exists():
 			card_memberships = CardMembership.objects.filter(card_id=card_id)
 		else:
 			card_memberships = []
 		context = {"card": card_selected, "card_checklists": card_checklists, "card_labels": card_labels, "card_memberships": card_memberships}
-		# context = {"card": card_selected, "card_checklists": card_checklists, "card_memberships": card_memberships}
 
 		html = render_to_string('card_page.html', context)
 		return JsonResponse({'html':html})
@@ -147,7 +146,6 @@ def checklist_item_checked_status_change(request):
 def change_card_label(request):
 	if request.method == "POST":
 		selected_label_color = request.POST.get('label_color')
-		# selected_label_title = request.POST.get("label_id")
 		selected_card_id = int(request.POST.get("card_id"))
 		label_checked_str = request.POST.get("label_checked")
 		card = Card.objects.get(id=selected_card_id)
@@ -159,10 +157,11 @@ def change_card_label(request):
 			new_card_label.card = card
 			new_card_label.label = board_label
 			new_card_label.save()
-			context = {"label": new_card_label}
-			card_label_html = render_to_string("card_page_label_partial.html", context)
-			index_label_html = render_to_string("index_list_card_label_partial.html", context)
-			return JsonResponse({"card_label_html":card_label_html, "index_label_html": index_label_html})
+
+			context = {"card": card}
+			card_page_detail_html = render_to_string("card_page_detail_data_partial.html", context)
+			index_card_html = render_to_string('index_list_card_partial.html', context)
+			return JsonResponse({'card_page_detail_html': card_page_detail_html, 'index_card_html': index_card_html })
 
 		elif label_checked_str == "false":
 			card_label = CardLabel.objects.get(card=card, label=board_label)
@@ -285,10 +284,8 @@ def update_due_date(request):
 		aware_datetime = make_aware(datetime_obj, timezone=current_tz)
 		card.due_date = aware_datetime
 		card.save()
-		card_memberships = CardMembership.objects.filter(card_id=card_id)
-		card_labels = card.cardlabel_set.all()
 
-		context = {"card": card, "card_memberships":card_memberships, "card_labels": card_labels}
+		context = {"card": card}
 		card_page_detail_html = render_to_string("card_page_detail_data_partial.html", context)
 		index_card_html = render_to_string('index_list_card_partial.html', context)
 		return JsonResponse({'card_page_detail_html': card_page_detail_html, 'index_card_html': index_card_html })
@@ -300,10 +297,7 @@ def remove_due_date(request):
 		card.due_date = None 
 		card.save()
 
-		card_memberships = CardMembership.objects.filter(card_id=card_id)
-		card_labels = card.cardlabel_set.all()
-
-		context = {"card": card, "card_memberships":card_memberships, "card_labels": card_labels}
+		context = {"card": card}
 		card_page_detail_html = render_to_string("card_page_detail_data_partial.html", context)
 		index_card_html = render_to_string('index_list_card_partial.html', context)
 		return JsonResponse({'card_page_detail_html': card_page_detail_html, 'index_card_html': index_card_html })
@@ -319,10 +313,7 @@ def update_due_date_completion(request):
 			card.due_date_completed = False 
 		card.save()
 
-		card_memberships = CardMembership.objects.filter(card_id=card_id)
-		card_labels = card.cardlabel_set.all()
-
-		context = {"card": card, "card_memberships":card_memberships, "card_labels": card_labels}
+		context = {"card": card}
 		card_page_detail_html = render_to_string("card_page_detail_data_partial.html", context)
 		index_card_html = render_to_string('index_list_card_partial.html', context)
 		return JsonResponse({'card_page_detail_html': card_page_detail_html, 'index_card_html': index_card_html })
@@ -460,10 +451,7 @@ def change_label_name(request):
 		context = {"card": card_selected, "label_list": label_list, "board_labels": board_labels }
 		pop_over_label_html = render_to_string("pop_over_label_partial.html",context)
 
-		card_memberships = CardMembership.objects.filter(card_id=card_id)
-		card_labels = card_selected.cardlabel_set.all()
-
-		context = {"card": card_selected, "card_memberships":card_memberships, "card_labels": card_labels}
+		context = {"card": card_selected}
 		card_page_detail_html = render_to_string("card_page_detail_data_partial.html", context)
 
 		return JsonResponse({'pop_over_html':pop_over_label_html, "card_page_html": card_page_detail_html})

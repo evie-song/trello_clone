@@ -104,14 +104,31 @@ class Card(models.Model):
 	def get_all_card_memberships(self):
 		card_memberships = CardMembership.objects.filter(card=self)
 
-		board_memberships = []
-		if card_memberships:
+		if card_memberships.count() == 0:
+			return []
+		else: 
+			board_memberships = []
 			for membership in card_memberships:
 				if membership.member != self.list_name.board.user:
 					board_membership = BoardMembership.objects.get(member=membership.member, board=self.list_name.board)
 					board_memberships.append(board_membership)
-		return board_memberships
+			return board_memberships
 
+	def get_labels_in_order(self):
+		card_labels = self.cardlabel_set.all()
+		if card_labels.count() == 0:
+			return []
+		else: 
+			label_id_list = []
+			for card_label in card_labels:
+				label_id = card_label.label.id
+				label_id_list.append(label_id)
+				label_id_list.sort()
+			card_labels_in_order = []
+			for label_id in label_id_list:
+				card_label = CardLabel.objects.get(label_id=label_id, card=self)
+				card_labels_in_order.append(card_label)
+			return card_labels_in_order
 
 class Checklist(models.Model):
 	card_name = models.ForeignKey(Card, on_delete=models.CASCADE)
