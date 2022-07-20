@@ -145,15 +145,21 @@ class ChecklistItem(models.Model):
 
 
 class Label(models.Model):
-	# board = models.ForeignKey(Board, on_delete=models.CASCADE)
-	card_name = models.ForeignKey(Card, on_delete=models.CASCADE)
+	board = models.ForeignKey(Board, on_delete=models.CASCADE)
 	label_title = models.CharField(max_length=200)
 	label_custom_title = models.CharField(max_length=200, blank=True)
-	label_selected = models.BooleanField(default=False)
 	date_created = models.DateTimeField(auto_now_add=True)
 
 	def __str__(self):
 		return self.label_title
+
+class CardLabel(models.Model):
+	card = models.ForeignKey(Card, on_delete=models.CASCADE)
+	label = models.ForeignKey(Label, on_delete=models.CASCADE)
+	date_created = models.DateTimeField(auto_now_add=True)
+
+	def __str__(self):
+		return (self.card.card_title + " " + self.label.label_title + " " + self.label.label_custom_title)
 
 class CardMembership(models.Model):
 	card = models.ForeignKey(Card, on_delete=models.CASCADE)

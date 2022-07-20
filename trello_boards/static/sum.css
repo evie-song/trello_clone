@@ -1371,7 +1371,8 @@ textarea.checklist-item-input-box {
 }
 
 input.checklist-title,
-input.new-board-title {
+input.new-board-title,
+input.label-custom-title {
     background-color: #fafbfc;
     display: block;
     width: 100%;
@@ -1397,7 +1398,7 @@ ul.edit-label-pop-over {
 	border-radius: 3px;
     cursor: pointer;
     font-weight: 700;
-    min-height: 20px;
+    min-height: 32px;
     padding: 6px 36px 6px 12px;
     width: 100%;
     display: block;
@@ -1556,7 +1557,7 @@ ul.edit-label-pop-over {
 }
 
 .sortable-list-placeholder {
-	background-color: #3fa45b;
+	background: linear-gradient(rgba(0, 0, 0, 0.15), rgba(0, 0, 0, 0.15));
 	width: 272px;
 	display: inline-block;
 	border-radius: 3px;
@@ -1649,3 +1650,10 @@ ul.edit-label-pop-over {
     color: rgb(0, 82, 204);
     margin: 20px 0;
 }
+
+.edit-label-name {
+	cursor: pointer;
+}
+
+
+

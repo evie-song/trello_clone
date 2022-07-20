@@ -1,0 +1,14 @@
+<div class="pop-over-header">
+	<span class="pop-over-header-title">Change label</span>
+	<span class="icon-sm material-icons pop-over-close-icon">&#xe5cd;</span>	
+</div>
+<div class="pop-over-content">
+	<form class="change-label-name-form" action="change_label_name" method="post">
+		{% csrf_token %}
+		<input type="hidden" name="card_id" value="{{ card.id }}">
+		<input type="hidden" name="board_label_id" value="{{ label.id }}">
+		<label>Name</label>
+		<input type="text" name="name" class="label-custom-title" value="{{label.label_custom_title}}">
+		<input class="save-btn checklist-save-btn" type="submit" name="submit" value="Save">
+	</form>
+</div>

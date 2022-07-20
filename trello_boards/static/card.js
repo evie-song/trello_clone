@@ -698,6 +698,63 @@ $(document).ready(function() {
 		})
 	})
 
+	// Render a pop over form to change the label's custom name. 
+	$(document).on("click", ".edit-label-name", function(event) {
+		const $btnSelected = $(this)
+		const $labelColor = $btnSelected.siblings('.card-label').data('id')
+		const $cardId = $btnSelected.closest('ul').siblings('input[name="card_id"]').val()
+		const csrftoken = getCookie("csrftoken")
+
+
+		$.ajax({
+			url: "render_pop_over_change_label_name",
+			type: "POST",
+			data: {
+				"card_id": $cardId,
+				"label_color": $labelColor
+			},
+
+			beforeSend: function (xhr) {
+				xhr.setRequestHeader("X-CSRFToken", csrftoken);
+			},
+			success: function (data) {
+				$('.pop-over').html(data.html)
+			},
+			error: function (error) {
+                console.log(error);
+            }
+		})
+	})
+
+	// Update a board label's custom title. 
+	$(document).on("submit", ".change-label-name-form", function(event) {
+		event.preventDefault()
+		const $formSelected = $(this)
+		const $data = $formSelected.serialize()
+		const csrftoken = getCookie("csrftoken")
+
+		console.log($data)
+
+		$.ajax ({
+			url: $formSelected.attr("action"),
+			type: "POST",
+			data: $data,
+
+			beforeSend: function (xhr) {
+				xhr.setRequestHeader("X-CSRFToken", csrftoken);
+			},
+			success: function (data) {
+				$('.pop-over').html(data.pop_over_html)
+				$('.card-detail-module.card-detail-data').html(data.card_page_html)
+			},
+			error: function (error) {
+                console.log(error);
+            }
+
+		})
+	})
+
+
 	// Save a new checklist from the pop over form. 
 	$(document).on("submit", ".checklist-form", function(event) {
 		event.preventDefault()
@@ -843,8 +900,7 @@ $(document).ready(function() {
 		const $cardId = $label.closest(".edit-label-pop-over").siblings("input[name=card_id]").val()
 		const csrftoken = getCookie("csrftoken")
 		let labelChecked = ""
-		const $labelColorArr = $(this).data("id").split("_")
-		const $labelColor = $labelColorArr[$labelColorArr.length-1]
+		const $labelColor = $(this).data("id")
 		const cardIdName = 'card_id_' + $cardId
 
 		if ($labelCheckIcon.hasClass("icon-show")) {
@@ -863,14 +919,13 @@ $(document).ready(function() {
 			$labelCheckIcon.show()
 			labelChecked = "true"
 			$('.card-detail-item.labels').removeClass('hide')
-
 		}
 
 		$.ajax({
 			url: "change_card_label",
 			type: "POST",
 			data: {
-				"label_id": $label.data("id"),
+				"label_color": $labelColor,
 				"card_id": $cardId,
 				"label_checked": labelChecked
 			},

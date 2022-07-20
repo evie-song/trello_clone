@@ -7,43 +7,14 @@
 	<span class="edit-label-title">Labels</span>
 	<input type="hidden" name="card_id" value="{{ card.id }}">
 	<ul class="edit-label-pop-over">
-		<li>
-			<span class="card-label card-label-green" data-id="label_green">Green
-				<span class="icon-sm material-icons label-check-icon {% if 'label_green' in label_list %}icon-show{% endif %}">&#xe5ca;</span>
-			</span>
-			<span class="icon-sm material-icons edit-icon">&#xe3c9;</span>
-		</li>
-		<li>
-			<span class="card-label card-label-yellow" data-id="label_yellow">Yellow
-				<span class="icon-sm material-icons label-check-icon {% if 'label_yellow' in label_list %}icon-show{% endif %}">&#xe5ca;</span>
-			</span>
-			<span class="icon-sm material-icons edit-icon">&#xe3c9;</span>
-		</li>
-		<li>
-			<span class="card-label card-label-orange" data-id="label_orange">Orange
-				<span class="icon-sm material-icons label-check-icon {% if 'label_orange' in label_list %}icon-show{% endif %}">&#xe5ca;</span>
-			</span>
-			<span class="icon-sm material-icons edit-icon">&#xe3c9;</span>
-		</li>
-		<li>
-			<span class="card-label card-label-red" data-id="label_red">Red
-				<span class="icon-sm material-icons label-check-icon {% if 'label_red' in label_list %}icon-show{% endif %}">&#xe5ca;</span>
-			</span>
-			<span class="icon-sm material-icons edit-icon">&#xe3c9;</span>
-		</li>
-		<li>
-			<span class="card-label card-label-purple" data-id="label_purple">Purple
-				<span class="icon-sm material-icons label-check-icon {% if 'label_purple' in label_list %}icon-show{% endif %}">&#xe5ca;</span>
-			</span>
-			<span class="icon-sm material-icons edit-icon">&#xe3c9;</span>
-		</li>
-		<li>
-			<span class="card-label card-label-blue" data-id="label_blue">Blue
-				<span class="icon-sm material-icons label-check-icon {% if 'label_blue' in label_list %}icon-show{% endif %}">&#xe5ca;</span>
-			</span>
-			<span class="icon-sm material-icons edit-icon">&#xe3c9;</span>
-		</li>
-
+		{% for board_label in board_labels %}
+			<li>
+				<span class="card-label card-label-{{board_label.label_title}}" data-id="{{board_label.label_title}}">{{board_label.label_custom_title}}
+					<span class="icon-sm material-icons label-check-icon {% if board_label.label_title in label_list %}icon-show{% endif %}">&#xe5ca;</span>
+				</span>
+				<span class="icon-sm material-icons edit-icon edit-label-name">&#xe3c9;</span>
+			</li>
+		{% endfor %}
 	</ul>
 </div>
 
