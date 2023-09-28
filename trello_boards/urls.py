@@ -38,7 +38,10 @@ urlpatterns = [
     path('board/delete_list', views.delete_list, name='delete_list'),
     path('render_pop_over_new_board', views.render_pop_over_new_board, name='render_pop_over_new_board'),
     path('board/render_pop_over_change_label_name', views.render_pop_over_change_label_name, name='render_pop_over_change_label_name'),
-    path('board/change_label_name', views.change_label_name, name="change_label_name")
+    path('board/change_label_name', views.change_label_name, name="change_label_name"),
+    path('board/edit_card_title', views.edit_card_title, name="edit_card_title"),
+    path('board/edit_board_title', views.edit_board_title, name="edit_board_title"),
+    path('board/render_pop_over_delete_board', views.render_pop_over_delete_board, name="render_pop_over_delete_board")
 
 
 

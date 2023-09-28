@@ -147,7 +147,6 @@ $(document).ready(function() {
 	// initialize sortable on lists.
 	sortableList()
 
-
 	// on textarea elements, auto expand height and prevent scroll bar. 
 	$('textarea').each(function () {
 	  this.setAttribute('style', 'height:' + (this.scrollHeight) + 'px;overflow-y:hidden;');
@@ -165,7 +164,6 @@ $(document).ready(function() {
 		$newCardForm.find('textarea').focus()
 	})
 
-	
 
 	$(document).on("click", ".new-card-clear-icon", function(){
 		const $cardComposer = $(this).parent().parent().siblings("a")
@@ -188,9 +186,8 @@ $(document).ready(function() {
 		const $cardComposer = $formSelected.siblings('.open-list-composer')
 		$cardComposer.show()
 		$formSelected.hide()
-		// console.log(this)
-		console.log('.board', e.target)
 	})
+
 	$(document).on('click', '.board > *', (e)=>{
 		e.stopPropagation()
 		e.stopImmediatePropagation()
@@ -398,7 +395,6 @@ $(document).ready(function() {
 	            success: function (data) {
 	                $(".list-wrapper.empty").before(data.html)
 	                $form[0].reset()
-	                console.log('new list')
 	                sortableCard()
 
 	            },
@@ -435,6 +431,12 @@ $(document).ready(function() {
 		})
 	})
 
+	// press Enter key to submit a new card. 
+	$(document).on('keydown', '.list-card-composer-textarea.new-card-name', (e) => {
+		if (e.keyCode == 13 ) {
+			$('.new-card-form').submit()
+		}
+	})
 
 	// Setting the click event listner on the new card submit button
 	$(document).on('submit', '.new-card-form', function(event){
@@ -525,13 +527,22 @@ $(document).ready(function() {
 		$popOver.hide()
 	})
 
+
 	// render account/new board/remove list pop over window. 
-	$(document).on('click', '.member-icon.account-menu, .new-board-menu, .list-header-icon', function(event){
+	$(document).on('click', '.member-icon.account-menu, .new-board-menu, .list-header-icon, .board-menu', function(event){
+		console.log('test')
 		event.preventDefault()
 		const $btnSelected = $(this)
 		const csrftoken = getCookie("csrftoken")
 
-		let position = $(this).position()
+		let position
+
+		if ($btnSelected.hasClass('board-menu')) {
+			position = $btnSelected.closest('.board-name-container').position()
+		} else {
+			position = $(this).position()
+		}
+
 		let positionLeft, positionTop
 	
 		positionLeft = position.left
@@ -541,7 +552,7 @@ $(document).ready(function() {
 		const userId = $(this).siblings('input[name=user_id]').val()
 		console.log(positionLeft, positionTop)
 
-		if ($btnSelected.hasClass('account-menu')) {
+		if ($btnSelected.hasClass('account-menu'))  {
 			url = 'render_pop_over_account'
 			data = {"user_id": userId}
 		}
@@ -556,6 +567,14 @@ $(document).ready(function() {
 			const listId = $btnSelected.closest('.list-wrapper').find('input[name=list_id]').val()
 			data = {"list_id": listId}
 		}
+
+		if ($btnSelected.hasClass('board-menu')) {
+			const $boardId = $btnSelected.siblings('input[name=board_id]').val()
+
+			url = 'render_pop_over_delete_board'
+			data = {"board_id": $boardId}
+		}
+		
 
 		$.ajax ({
 			url: url,
@@ -584,11 +603,19 @@ $(document).ready(function() {
 					})
 				}
 
+				if ($btnSelected.hasClass('board-menu')) {
+					$popOver.css({
+						"left": positionLeft + 100,
+						"top": positionTop + 36
+					})
+				}
+
 				if (($btnSelected.hasClass('new-board-menu')) && ($btnSelected.hasClass('board-link'))) {
 					$popOver.css({
 						"left": positionLeft + 100,
 						"top": positionTop + $btnSelected.height - 20
 					})
+
 				} else if ($btnSelected.hasClass('new-board-menu')) {
 					$popOver.css({
 						"left": positionLeft + 24,
@@ -857,7 +884,6 @@ $(document).ready(function() {
 			$memberCheckIcon.hide()
 			memberChecked = 'false'
 
-
 			// $('.card-detail-item.members').hide()
 			// $('.list-card[id="' + cardIdName + '"]').find('.member-icon-container').hide()
 
@@ -1007,7 +1033,7 @@ $(document).ready(function() {
 
 	// Complete/undo complete due date complation from the checkbox. 
 	$(document).on('change', '.due-date-checkbox-form input[name=checkbox]', function (event) {
-		$checkBox = $(this)
+		const $checkBox = $(this)
 		const $cardIdArr = $(this).closest(".window").attr("id").split("_");
 		const cardId = $cardIdArr[$cardIdArr.length-1];
 		const cardIdName = 'card_id_' + cardId
@@ -1074,6 +1100,95 @@ $(document).ready(function() {
 			$formSelected.find('input[name=name]').focus()
 		}
 	})
+
+	// edit card titles.
+	$(document).on('blur', '.card_page_title', (e) => {
+		const $titleDiv = $('.card_page_title')
+		const $newTitle = $titleDiv.text()
+		const $oldTitle = $titleDiv.attr('data-value')
+
+		if ($newTitle != $oldTitle ) {
+			if ($newTitle.length == 0 ){
+				$titleDiv.text($oldTitle)
+				return
+			}
+			const $cardIdAry = $titleDiv.closest('.window').attr('id').split('_')
+			const $cardId = $cardIdAry[$cardIdAry.length-1]
+			$titleDiv.attr('data-value', $newTitle)
+
+			const csrftoken = getCookie('csrftoken')
+			const $data = {
+				"card_id": $cardId,
+				"card_title": $newTitle
+			}
+
+			$.ajax({
+				url: "edit_card_title",
+				type: "POST",
+				data: $data,
+				beforeSend: function (xhr) {
+					xhr.setRequestHeader("X-CSRFToken", csrftoken);
+				},
+				success: function (data) {
+					const $cardIdName = "card_id_" + $cardId
+					const $cardDiv = $('.list-card[id="' + $cardIdName + '"]')
+					$cardDiv.children('.list-card-title').text($newTitle)
+				},
+				error: function (error) {
+					console.log(error);
+				}
+			})
+		}
+	})
+
+	// edit board titles
+	$(document).on("blur", "#board-title", (e) => {
+		const $titleDiv = $('#board-title')
+		const $newTitle = $titleDiv.text()
+		const $oldTitle = $titleDiv.attr('data-value')
+
+		if ($newTitle != $oldTitle) {
+			if ($newTitle.length == 0) {
+				$titleDiv.text($oldTitle)
+				return
+			}
+
+			const $boardId = $titleDiv.attr("data-id")
+			$titleDiv.attr('data-value', $newTitle)
+
+			const $sidebarBoardTitleDiv = $('.sidebar-item.selected-board .board-title')
+			$sidebarBoardTitleDiv.text($newTitle)
+
+			const csrftoken = getCookie('csrftoken')
+			const $data = {
+				"board_id": $boardId,
+				"board_title": $newTitle
+			}
+
+			$.ajax({
+				url: "edit_board_title",
+				type: "POST",
+				data: $data,
+				beforeSend: function (xhr) {
+					xhr.setRequestHeader("X-CSRFToken", csrftoken);
+				},
+				success: function (data) {
+				},
+				error: function (error) {
+					console.log(error);
+				}
+			})
+		}
+	})
+
+	// prevent going to new line when editing board title.
+	$(document).on("keydown", "#board-title, .card_page_title", (e) => {
+		if (e.keyCode == 13) {
+			e.preventDefault()
+			e.target.blur()
+		}
+	})
+
 })
 
 

@@ -116,19 +116,23 @@
 					<span class="material-icons large new-board-menu">&#xe145;</span>
 				</div>
 				{% for board in user.board_set.all %}
-					<a class="sidebar-item {% if board.id == board_selected.id %}selected-board{% endif %}" href="{% url 'trello_boards:board_page' board.id %}">
-						<input type="hidden" name="board_id" value="{{ board.id }}">
-						<div class="board-color-icon
-							{% if board.background_color == 'green' %}green-background
-							{% elif board.background_color == 'orange' %}orange-background
-							{% elif board.background_color == 'blue' %}blue-background
-							{% elif board.background_color == 'purple' %}purple-background
-							{% elif board.background_color == 'pink' %}pink-background
-							{% elif board.background_color == 'red' %}red-background
-							{%endif%}">
-							</div>
-						<span class="button-tittle">{{ board.board_title }}</span>
-					</a>
+					<div class="board-name-container">
+						<a class="sidebar-item {% if board.id == board_selected.id %}selected-board{% endif %}" href="{% url 'trello_boards:board_page' board.id %}">
+							<input type="hidden" name="board_id" value="{{ board.id }}">
+							<div class="board-color-icon
+								{% if board.background_color == 'green' %}green-background
+								{% elif board.background_color == 'orange' %}orange-background
+								{% elif board.background_color == 'blue' %}blue-background
+								{% elif board.background_color == 'purple' %}purple-background
+								{% elif board.background_color == 'pink' %}pink-background
+								{% elif board.background_color == 'red' %}red-background
+								{%endif%}">
+								</div>
+							<span class="button-tittle board-title">{{ board.board_title }}</span>
+						</a>
+						<span class="material-icons font-20 board-menu">&#xe5d2;</span>
+						<input type="hidden" name="board_id" value="{{board.id}}">
+					</div>
 				{% endfor %}
 			</div>
 
@@ -150,7 +154,7 @@
 					<span class="material-icons drop-arrow medium">&#xe313;</span>
 				</button>
 				<button class="board-header-button board-title">
-					<h1 class="board-title">{{ board_selected.board_title }}</h1>
+					<h1 class="board-title" id="board-title" contenteditable="true" data-id="{{board_selected.id}}" data-value="{{ board_selected.board_title }}">{{ board_selected.board_title }}</h1>
 				</button>
 				<button class="board-header-button">
 					<span class="material-icons medium">&#xe83a;</span>

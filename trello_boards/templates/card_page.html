@@ -2,7 +2,7 @@
 <div class="window" id='card_page_card_id_{{ card.id }}'>
 	<div class="window-header">
 		<span class="icon-lg window-header-icon material-icons">&#xe8f7;</span>					
-		<h1 class="card_page_title" contenteditable="true">{{ card.card_title }}</h1>
+		<h1 class="card_page_title" id="card-page-title" contenteditable="true" data-value="{{ card.card_title }}">{{ card.card_title }}</h1>
 		<p>
 			<span>in list 
 				<a class="list-name" href="#">To Do</a>
@@ -23,7 +23,7 @@
 		<div class="card-detail-module card-description">
 			<div class="main-col-indent main-col-title description">
 				<span class="icon-lg main-col-header-icon material-icons">&#xe236;</span>	
-				<h2>Description</h2>
+				<h2 class="test-div">Description</h2>
 				<button class="description-edit-button {% if card.card_description %}btn-show{% endif %}">Edit</button>
 			</div>
 			<div class="description-input main-col-indent">

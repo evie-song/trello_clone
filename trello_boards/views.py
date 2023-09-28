@@ -46,6 +46,15 @@ def board_page(request, board_id):
 		lists = []
 	return render(request, "index_board_partial.html", {'board_members': board_members,'board_selected': board_selected, 'lists': lists, 'user': user})
 	
+def edit_board_title(request):
+	if request.method == "POST":
+		board_id = request.POST['board_id']
+		board_title = request.POST['board_title']
+		board_selected = Board.objects.get(id=board_id)
+		board_selected.board_title = board_title
+		board_selected.save()
+		
+		return JsonResponse({'result': "success" })
 
 def new_list(request):
 	if request.method == "POST":
@@ -103,6 +112,15 @@ def card_description_edit(request):
 		card_selected.card_description = new_description
 		card_selected.save()
 		return JsonResponse({'html':"succsess"})
+
+def edit_card_title(request):
+	if request.method == "POST":
+		card_id = request.POST['card_id']
+		card_selected = Card.objects.get(id=card_id)
+		new_title = request.POST['card_title']
+		card_selected.card_title = new_title.strip()
+		card_selected.save()
+		return JsonResponse({'html': "success"})
 
 def new_checklist_item(request):
 	if request.method == "POST":
@@ -371,6 +389,13 @@ def render_pop_over_new_board(request):
 		user_id = int(request.POST.get("user_id"))
 		user = User.objects.get(id=user_id)
 		html = render_to_string('index_pop_over_new_board_partial.html', {"user": user})
+		return JsonResponse({'html': html})
+
+def render_pop_over_delete_board(request):
+	if request.method == 'POST':
+		board_id = request.POST['board_id']
+		board = Board.objects.get(id=board_id)
+		html = render_to_string('pop_over_delete_board_partial.html', {"board": board})
 		return JsonResponse({'html': html})
 
 def new_board(request):

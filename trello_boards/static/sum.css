@@ -116,6 +116,14 @@ ul {
     align-items: flex-start;
 }
 
+#card-page-title {
+	padding: 4px;
+}
+
+#card-page-title:focus {
+	background: white;
+}
+
 /*board-page css*/
 /*font setting*/
 .board-page .header-button span, 
@@ -425,6 +433,16 @@ ul {
 	color: #f6f7f8;
     font-size: 16px;
     font-weight: 800;
+}
+
+#board-title:focus {
+	outline: none;
+}
+
+#board-title {
+	width: 60px;
+	overflow: hidden;
+	white-space: nowrap;
 }
 
 /*board header format*/
@@ -1654,6 +1672,24 @@ ul.edit-label-pop-over {
 .edit-label-name {
 	cursor: pointer;
 }
+
+.font-20 {
+	font-size: 20px !important;
+}
+
+.board-name-container {
+	position: relative;
+}
+
+.material-icons.board-menu {
+	position: absolute;
+	top: 6px;
+	right: 8px;
+	color: white;
+	cursor: pointer;
+}
+
+
 
 
 
