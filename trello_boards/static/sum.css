@@ -1689,6 +1689,13 @@ ul.edit-label-pop-over {
 	cursor: pointer;
 }
 
+.cursor-not-allowed {
+	cursor: not-allowed !important;
+}
+
+.cursor-pointer {
+	cursor: pointer;
+}
 
 
 

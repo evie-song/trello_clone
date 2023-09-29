@@ -13,7 +13,7 @@
 			<a class="open-card-composer" href="#">
 				<span class="material-icons front-icon large">&#xe145;</span>
 				<span class="card-composer-title">Add a card</span>
-				<button>
+				<button class="cursor-not-allowed">
 					<span class="material-icons small">&#xe161;</span>
 				</button>
 			</a>
@@ -21,7 +21,7 @@
 				{% csrf_token %}
 				<input type="hidden" name="list_id" value="{{ list.id }}">
 				<textarea class="list-card-composer-textarea new-card-name" name="new_card_name" placeholder="Enter card title..."></textarea>
-				<div class="new-card-submit submit-control">
+				<div class="new-card-submit submit-control cursor-pointer">
 					<input class="submit-control-btn" type="submit" value="Submit">
 					<span class="material-icons icon-lg new-card-clear-icon">&#xe14c;</span>
 				</div>
