@@ -3,7 +3,16 @@
 {% block content %}
 	
 <div class="board-page-wrapper">
-<div class="board-page">
+	<div class="board-page 
+	{% if board_selected %}
+		{% if board_selected.background_color == 'green' %}green-background
+		{% elif board_selected.background_color == 'orange' %}orange-background
+		{% elif board_selected.background_color == 'blue' %}blue-background
+		{% elif board_selected.background_color == 'purple' %}purple-background
+		{% elif board_selected.background_color == 'pink' %}pink-background
+		{% elif board_selected.background_color == 'red' %}red-background
+		{%endif%}
+	{%endif%}">
 <div class="header">
 	<div class="header-left-1">
 		<button class="material-icons switch-button large">&#xe5c3;</button>
@@ -109,19 +118,23 @@
 					<span class="material-icons large new-board-menu">&#xe145;</span>
 				</div>
 				{% for board in user.board_set.all %}
-					<a class="sidebar-item {% if board.id == board_selected.id %}selected-board{% endif %}" href="{% url 'trello_boards:board_page' board.id %}">
-						<input type="hidden" name="board_id" value="{{ board.id }}">
-						<div class="board-color-icon 
-							{% if board.background_color == 'green' %}green-background
-							{% elif board.background_color == 'orange' %}orange-background
-							{% elif board.background_color == 'blue' %}blue-background
-							{% elif board.background_color == 'purple' %}purple-background
-							{% elif board.background_color == 'pink' %}pink-background
-							{% elif board.background_color == 'red' %}red-background
-							{%endif%}">
-						</div>
-						<span class="button-tittle">{{ board.board_title }}</span>
-					</a>
+					<div class="board-name-container">
+						<a class="sidebar-item {% if board.id == board_selected.id %}selected-board{% endif %}" href="{% url 'trello_boards:board_page' board.id %}">
+							<input type="hidden" name="board_id" value="{{ board.id }}">
+							<div class="board-color-icon
+								{% if board.background_color == 'green' %}green-background
+								{% elif board.background_color == 'orange' %}orange-background
+								{% elif board.background_color == 'blue' %}blue-background
+								{% elif board.background_color == 'purple' %}purple-background
+								{% elif board.background_color == 'pink' %}pink-background
+								{% elif board.background_color == 'red' %}red-background
+								{%endif%}">
+								</div>
+							<span class="button-tittle sidebar-board-title">{{ board.board_title }}</span>
+						</a>
+						<span class="material-icons font-20 board-menu">&#xe5d2;</span>
+						<input type="hidden" name="board_id" value="{{board.id}}">
+					</div>
 				{% endfor %}
 			</div>
 

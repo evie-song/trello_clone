@@ -1156,7 +1156,7 @@ $(document).ready(function() {
 			const $boardId = $titleDiv.attr("data-id")
 			$titleDiv.attr('data-value', $newTitle)
 
-			const $sidebarBoardTitleDiv = $('.sidebar-item.selected-board .board-title')
+			const $sidebarBoardTitleDiv = $('.sidebar-item.selected-board .sidebar-board-title')
 			$sidebarBoardTitleDiv.text($newTitle)
 
 			const csrftoken = getCookie('csrftoken')

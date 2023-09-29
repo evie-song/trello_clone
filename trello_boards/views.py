@@ -430,6 +430,12 @@ def new_board(request):
 		new_board.save()
 		return JsonResponse({'board_id': new_board.id})
 
+def delete_board(request, board_id):
+	board_selected = Board.objects.get(id=board_id)
+	board_selected.delete()
+	return redirect('/')
+
+
 def render_pop_over_list_menu(request):
 	if request.method == 'POST':
 		list_id = int(request.POST.get('list_id'))

@@ -4,6 +4,8 @@
 </div>
 <div class="pop-over-content">
 	<p>Deleting a board is permanent and there is no way to get it back.</p>
-	<input type="hidden" name="board_id" value="{{ board.id }}">
-	<button class="confirm-delete-checklist delete-alert-btn">Delete board</button>
+    <input type="hidden" name="board_id" value="{{ board.id }}">
+    <a href="delete_board/{{board.id}}">
+        <button type="submit" class="delete-alert-btn">Delete board</button>
+    </a>
 </div>
