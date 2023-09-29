@@ -148,89 +148,10 @@
 	</div>
 
 	<div class="main-body">
-		<div class="board-header">
-			<div class="board-header-module mod-left">
-				<button class="board-header-button">
-					<span class="material-icons medium">&#xe30d;</span>
-					<span class="button-tittle">Boards</span>
-					<span class="material-icons drop-arrow medium">&#xe313;</span>
-				</button>
-				<button class="board-header-button board-title">
-					<h1 class="board-title" id="board-title" contenteditable="true" data-id="{{board_selected.id}}" data-value="{{ board_selected.board_title }}">{{ board_selected.board_title }}</h1>
-				</button>
-				<button class="board-header-button">
-					<span class="material-icons medium">&#xe83a;</span>
-				</button>
-				<span class="header-button-divider"></span>
-				<button class="board-header-button">
-					<span class="button-tittle">Trello workspace</span>
-				</button>
-			
-				<span class="header-button-divider"></span>
-				<button class="board-header-button">
-					<span class="material-icons front-icon medium">&#xe899;</span>
-					<span class="button-tittle">Private</span>
-				</button>
-				<button class="">
-					<div class="member-icon">{{ user.username.0|title }}</div>
-				</button>
-				{% for membership in board_members %}
-					<button>
-						<div class="member-icon" style="background-color: {{membership.background_color_code}}">{{ membership.member.username.0|title }}</div>
-					</button>
-				{% empty %}
-				{% endfor %}
-				<button class="board-header-button share-button">
-					<span class="material-icons front-icon medium">&#xe7fe;</span>
-					<span class="button-tittle">Share</span>
-				</button>
-			</div>
-			<div class="board-header-module mod-right">
-				<button class="board-header-button">
-					<span class="material-icons front-icon medium">&#xe63c;</span>
-					<span class="button-tittle">Power-Ups</span>
-				</button>
-				<button class="board-header-button">
-					<span class="material-icons front-icon medium">&#xe3e7;</span>
-					<span class="button-tittle">Automation</span>
-				</button>
-				<span class="header-button-divider"></span>
-				<button class="board-header-button">
-					<span class="material-icons front-icon medium">&#xe152;</span>
-					<span class="button-tittle">Filter</span>
-				</button>
-				<button class="board-header-button">
-					<span class="material-icons front-icon medium">&#xe5d2;</span>
-					<span class="button-tittle">Show Menu</span>
-				</button>
-			</div>
-		</div>
-		<div class="board-canvas">
-			<div class="board">
-				{% for list in board_selected.get_lists_in_order %}
-					{% include "index_list_partial.html" %}
-				{% endfor %}
-				<div class="list-wrapper empty">
-					<div class="list-content">
-						<div class="card-composer-container" id="list-composer">
-							<a class="open-list-composer" href="#">
-								<span class="material-icons front-icon large">&#xe145;</span>
-								<span class="list-composer-title">Add a new list</span>
-							</a>
-							<form action="{% url 'trello_boards:new_list' %}" method="post" id="new-list-form">
-								{% csrf_token %}
-								<input type="hidden" name="board_id" value="{{board_selected.id}}">
-								<input class="new-list-composer-input" id="new-list-name" type="text" name="new_list_name" placeholder="Enter list title...">
-								<div class="new-list-submit submit-control">
-									<input class="submit-control-btn" type="submit" value="Submit">
-									<span class="material-icons icon-lg new-list-clear-icon">&#xe14c;</span>
-								</div>
-							</form>
-						</div>
-					</div>
-				</div>
-			</div>
-		</div>
+		{% block body_content %}
+
+		{% endblock body_content %}
+
 	</div>
 
 </div>
@@ -246,3 +167,4 @@
 </div>
 
 {% endblock content %}
+
