@@ -45,5 +45,6 @@ urlpatterns = [
     path('render_pop_over_delete_board', views.render_pop_over_delete_board, name="render_pop_over_delete_board"),
     path('board/delete_board/<int:board_id>', views.delete_board, name='delete_board'),
     path('delete_board/<int:board_id>', views.delete_board, name='delete_board'),
+    path('board/update_list_title', views.update_list_title, name='update_list_title')
 
 ]

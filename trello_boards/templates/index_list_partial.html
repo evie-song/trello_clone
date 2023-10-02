@@ -1,7 +1,10 @@
-<div class="list-wrapper">
+<div class="list-wrapper height-100">
 	<div class="list-content">
 		<div class="list-header">
 			<div class="list-title">{{ list.list_title }}</div>
+			<textarea class="list-title-edit is-hidden" contenteditable="true" data-id="{{list.id}}">{{ list.list_title }}</textarea>
+			<!-- <textarea></textarea> -->
+			<!-- <input class="list-title" contenteditable="true" value="{{list.list_title}}"> -->
 			<a class="material-icons list-header-icon" href="#">&#xe5d2;</a>
 		</div>
 		<div class="card-collection">

@@ -72,6 +72,15 @@ def new_list(request):
 		html = render_to_string('index_list_partial.html', context)
 		return JsonResponse({'html':html})
 
+def update_list_title(request):
+	if request.method == "POST":
+		list_id = request.POST['list_id']
+		list_selected = List.objects.get(id=list_id)
+		new_title = request.POST['list_title']
+		list_selected.list_title = new_title
+		list_selected.save()
+		return JsonResponse({'result': 'success'})
+
 def new_card(request):
 	if request.method == "POST":
 		new_card = Card()

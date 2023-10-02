@@ -92,7 +92,7 @@ $(document).ready(function() {
 			revert: true,
 			scroll: true,
 			items: '.list-wrapper',
-			handle: '.list-title',
+			handle: '.list-content',
 			placeholder: "sortable-list-placeholder",
 			cursor: "move",
 			containment: '.main-body',
@@ -640,7 +640,7 @@ $(document).ready(function() {
 	})
 
 	// render new checklist/label/remove checklist/add due date/remove card pop over window
-	$(document).on("click", ".window-sidebar .button-link, .labels .label-name, .labels .add-label-button, .delete-checklist-btn, .due-date-edit-button", function(event) {
+	$(document).on("click", ".window-sidebar .button-link.add-members-menu, .button-link.add-label-menu, .button-link.add-checklist-menu, .button-link.add-date-menu, .button-link.remove-card-menu, .labels .label-name, .labels .add-label-button, .delete-checklist-btn, .due-date-edit-button", function(event) {
 
 		const $btnSelected = $(this);
 		const $cardIdArr = $(this).closest(".window").attr("id").split("_");
@@ -680,8 +680,6 @@ $(document).ready(function() {
 			data = {"id": cardId};
 		}
 
-		console.log(data)
-
 		$.ajax({
 			url: url,
 			type: "POST",
@@ -690,12 +688,23 @@ $(document).ready(function() {
 				xhr.setRequestHeader("X-CSRFToken", csrftoken);
 			},
 			success: function (data) {
-				console.log('test')
 				$popOver.html(data.html)
 				if ($btnSelected.hasClass("remove-card-menu")) {
 					$popOver.css({
 						"left": positionLeft ,
 						"top": positionTop -170
+					})
+				} else if ($btnSelected.hasClass('due-date-edit-button')) {
+					$popOver.css({
+
+						"left": $btnSelected.offset().left,
+						"top": $btnSelected.offset().top +40
+					})
+				} else if ($btnSelected.hasClass('add-label-button')) {
+					$popOver.css({
+
+						"left": $btnSelected.closest('.card-detail-item.labels').offset().left,
+						"top": $btnSelected.offset().top +40
 					})
 				} else {
 					$popOver.css({
@@ -725,13 +734,66 @@ $(document).ready(function() {
 		})
 	})
 
+	// edit and update list titles.
+	$(document).on('click', '.list-title', function(event){
+		const $btnSelected = $(this)		
+		$btnSelected.addClass('is-hidden')
+		const $textareaEle = $btnSelected.siblings('textarea')
+		$textareaEle.removeClass('is-hidden')
+		$textareaEle.addClass('is-editing')
+		$textareaEle.select()
+	})
+
+	$(document).on('blur', '.list-title-edit', function(event){
+		const $btnSelected = $(this)
+		$btnSelected.removeClass('is-editing')
+		$btnSelected.addClass('is-hidden')
+		const $titleDiv = $btnSelected.siblings('.list-title')
+		$titleDiv.removeClass('is-hidden')
+
+		const $newTitle = $btnSelected.val()
+		const $oldTitle = $btnSelected.text()
+		if (!($newTitle == $oldTitle) ){
+			$titleDiv.text($newTitle)
+			const $listId = $btnSelected.attr('data-id')
+			const $data = {
+				'list_id' : $listId,
+				'list_title': $newTitle
+			}
+			const csrftoken = getCookie("csrftoken")
+
+			$.ajax({
+				url: "update_list_title",
+				type: "POST",
+				data: $data,
+	
+				beforeSend: function (xhr) {
+					xhr.setRequestHeader("X-CSRFToken", csrftoken);
+				},
+				success: function (data) {
+					console.log(data)
+				},
+				error: function (error) {
+					console.log(error);
+				}
+			})
+			console.log($listId)
+		}
+	})
+
+	$(document).on("keydown", ".list-title-edit", (e) => {
+		if (e.keyCode == 13) {
+			e.preventDefault()
+			e.target.blur()
+		}
+	})
+
 	// Render a pop over form to change the label's custom name. 
 	$(document).on("click", ".edit-label-name", function(event) {
 		const $btnSelected = $(this)
 		const $labelColor = $btnSelected.siblings('.card-label').data('id')
 		const $cardId = $btnSelected.closest('ul').siblings('input[name="card_id"]').val()
 		const csrftoken = getCookie("csrftoken")
-
 
 		$.ajax({
 			url: "render_pop_over_change_label_name",

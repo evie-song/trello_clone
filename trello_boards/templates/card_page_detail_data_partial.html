@@ -20,7 +20,7 @@
 	<div class="card-detail-item-content">
 		<div class="card-detail-due-date-badge">
 			<form class="due-date-checkbox-form">
-				<input type="checkbox" name="checkbox" {%if card.due_date_completed == True%}checked{% endif %}>
+				<input type="checkbox" name="checkbox" {% if card.due_date_completed == True %}checked{% endif %}>
 				<button class="due-date-edit-button">
 					<span>{{ card.due_date|date:"M j y" }} at {{ card.due_date|date:"g:i A" }}</span>
 					<span class="due-reminder 
