@@ -448,9 +448,9 @@ ul {
 }
 
 #board-title {
-	width: 60px;
 	overflow: hidden;
 	white-space: nowrap;
+	max-width: 250px;
 }
 
 /*board header format*/
