@@ -46,7 +46,7 @@
 .board-page,
 .board-color-icon,
 .board-item {
-	 background-color: #b2c0c8;
+	 background-color: #425948;
 }
 
 .board-page .header {
@@ -83,5 +83,9 @@
 .search-bar-wrapper,
 .create-button {
 	background: linear-gradient(rgba(255, 255, 255, 0.20), rgba(255, 255, 255, 0.20));
+}
+
+.create-new-board {
+	color: white;
 }
 

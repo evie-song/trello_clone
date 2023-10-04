@@ -189,7 +189,7 @@ ul {
 
 .t-logo span {
 	font-size: 20px;
-	font-weight: 800;
+	font-weight: 500;
 }
 
 .trello-title {
@@ -381,14 +381,11 @@ ul {
 
 /*boards page format*/
 .boards-header {
-	height: 120px;
-	background-color: #f4f5f7;
-	text-align: center;	
-    padding: 60px 0px;
-    font-size: 30px;
-    letter-spacing: 2px;
-    color: rgb(94, 108, 132);
-    font-weight: 600;
+	background-color: white;
+	display: flex;
+    justify-content: space-between;
+    align-items: center;
+    padding: 24px 142px;
 }
 
 .boards-body {
@@ -579,6 +576,7 @@ ul {
     margin-bottom: 4px;
     color: #172b4d;
     clear: both;
+	text-wrap: wrap;
 }
 
 .list-cards {
@@ -1729,5 +1727,104 @@ ul.edit-label-pop-over {
     width: 100%;
 	font-weight: 540;
 }
+
+.create-new-board {
+	display: flex;
+	align-items: center;
+	justify-content: center;
+}
+
+.boards-header .sidebar-top .t-logo {
+	margin-right: 10px;
+}
+
+.boards-header .t-logo {
+	height: 60px;
+	width: 60px;
+	line-height: 60px;
+}
+
+.boards-header .letter-t {
+	font-size: 40px;
+}
+
+.brand-name-container, 
+.private-container {
+	display: flex;
+	color: black !important;
+}
+
+.brand-name, 
+.private {
+	color: black !important;
+}
+
+.brand-name {
+	font-weight: 600;
+	font-size: 20px;
+	line-height: 24px;
+	color: rgb(23, 43, 77) !important;
+}
+
+.private-container .material-icons, 
+.private-container .private {
+	
+	font-size: 12px;
+	color: rgb(68, 84, 111) !important;
+	padding: 0 2px;
+}
+
+.private-container {
+	display: flex;
+	align-items: center;
+}
+
+.private-container .material-icons {
+	display: flex;
+	align-items: center;
+	height: 16px;
+	width: 16px;
+	font-weight: 600;
+}
+
+.invite-container {
+	margin-bottom: 40px;
+	padding: 6px 12px;
+	background-color: rgb(11, 100, 225);
+	color: white !important;
+	border-radius: 3px;
+	display: flex;
+	align-items: center;
+}
+
+.invite-container .material-icons {
+	color: white !important;
+	font-size: 16px;
+	width: 20px;
+	height: 20px;
+	display: flex;
+	align-items: center;
+}
+
+.invite-container .invite {
+	color: white !important;
+	font-size: 14px;
+	font-weight: 500;
+}
+
+.line-break-container {
+	padding: 0 50px;
+	background: white;
+}
+
+.line-break {
+	border-bottom: 1px solid #dcdfe4;
+}
+
+
+
+
+
+
 
 

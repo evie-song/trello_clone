@@ -9,7 +9,7 @@ to give it a try, follow below steps:
 3. activate virtual environmenet: naviagte to project folder and run `source trello_clone_env/bin/activate`
 4. start local server: run `python manage.py runserver` or `python3 manage.py runserver`
 5. navigate to `localhost:8000` 
-6. create your account or use username `XXXX` and password `XXXX` to give it a try
+6. create your account or use username `testuser1` and password `Test@ccount` to give it a try
 
 
 this clone app resembles the ui design of the workflow app `trello.com` and incudes below features:

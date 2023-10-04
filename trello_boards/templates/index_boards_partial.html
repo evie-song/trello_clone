@@ -2,15 +2,34 @@
 
 {% block body_content %}
 	
-		<div class="boards-header">
-			Boards
-			<!-- <div class="header-title">Boards</div> -->
+		<div class="boards-header"> 
+			<div class="sidebar-top">
+				<a class="t-logo" href="#">
+					<span class="letter-t">T</span>
+				</a>
+				<div class="">
+					<div class="brand-name-container">
+						<a class="brand-name cursor-not-allowed " href="">Trello workspace</a>
+					</div>
+					<div class="private-container">
+						<span class="material-icons">lock_outline</span>
+						<span class="private smaller-font">Private</span>
+					</div>
+				</div>
+			</div>
+			<div class="invite-container">
+				<span class="material-icons">person_add</span>
+				<span class="invite">Invite Workspace members</span> 
+			</div>
+		</div>
+		<div class="line-break-container">
+			<div class="line-break"></div>
 		</div>
 		<div class="boards-body">
 			<div class="board-list-container">
 				<div class='board-container empty'>
 					<a class="board-link new-board-menu" href="#">
-						<div class="board-item">
+						<div class="board-item create-new-board">
 							Create new board
 						</div>
 					</a>
