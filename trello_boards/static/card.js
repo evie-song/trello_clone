@@ -155,6 +155,14 @@ $(document).ready(function() {
 	  this.style.height = (this.scrollHeight) + 'px';
 	})
 
+	// helper function to close new card form and show new card composer. 
+	function closeNewCardForm() {
+		const $form = $('.new-card-form')
+		const $composer = $('.open-card-composer')
+		$form.hide()
+		$composer.show()
+	}
+
 	// new card composer changes when selected. 
 	$(document).on("click", ".open-card-composer", function(){
 		const $cardComposer = $(this)
@@ -164,13 +172,11 @@ $(document).ready(function() {
 		$newCardForm.find('textarea').focus()
 	})
 
+	// close new card form and show new card composer by clicking close button
+	$(document).on("click", ".new-card-clear-icon", closeNewCardForm)
 
-	$(document).on("click", ".new-card-clear-icon", function(){
-		const $cardComposer = $(this).parent().parent().siblings("a")
-		const $newCardForm = $(this).parent().parent()
-		$cardComposer.show()
-		$newCardForm.hide()
-	})
+	// close new card form and show new card composer upon blur of the form. 
+	$(document).on('blur', '.list-card-composer-textarea', closeNewCardForm)
 
 	// new list composer changes when selected. 
 	$(document).on("click", ".open-list-composer", function(){
@@ -181,24 +187,31 @@ $(document).ready(function() {
 		$newListForm.find('input[name=new_list_name]').focus()
 	})
 
-	$(document).on("click", ".board", function(e){
-		const $formSelected = $('#new-list-form')
-		const $cardComposer = $formSelected.siblings('.open-list-composer')
-		$cardComposer.show()
-		$formSelected.hide()
-	})
+	// $(document).on("click", ".board", function(e){
+	// 	const $formSelected = $('#new-list-form')
+	// 	const $cardComposer = $formSelected.siblings('.open-list-composer')
+	// 	$cardComposer.show()
+	// 	$formSelected.hide()
+	// })
 
-	$(document).on('click', '.board > *', (e)=>{
-		e.stopPropagation()
-		e.stopImmediatePropagation()
-	})
+	// $(document).on('click', '.board > *', (e)=>{
+	// 	e.stopPropagation()
+	// 	e.stopImmediatePropagation()
+	// })
 
-	$(document).on("click", ".new-list-clear-icon", function(){
-		const $listComposer = $(this).parent().parent().siblings("a")
-		const $listCardForm = $(this).parent().parent()
-		$listComposer.show()
-		$listCardForm.hide()
-	})
+	// helper function to close new list form and show new list composer div. 
+	function closeNewListForm() {
+		const $form = $('#new-list-form')
+		const $composer = $('.open-list-composer')
+		$form.hide()
+		$composer.show()
+	}
+
+	// close new list form by clicking close button. 
+	$(document).on("click", ".new-list-clear-icon", closeNewListForm)
+
+	// close new list form upon blue of input element. 
+	$(document).on('blur', ".new-list-composer-input", closeNewListForm)
 
 	// Show and hide new checklist item form. 
 	$(document).on("click", ".add-new-checklist-item-btn", function(){
