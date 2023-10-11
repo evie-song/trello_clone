@@ -12,6 +12,5 @@ import os
 from django.core.wsgi import get_wsgi_application
 
 os.environ.setdefault('DJANGO_SETTINGS_MODULE', 'trello_clone.settings')
-os.environ.setdefault('PYTHON_VERSION', '2.7.15')
 
 application = get_wsgi_application()

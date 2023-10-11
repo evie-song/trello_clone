@@ -25,7 +25,7 @@ SECRET_KEY = 'django-insecure-ug)-tvl)8ftv!x!v!uu=(k5oy3_bu=ppp6bmg5uyjn)+3xwd+c
 # SECURITY WARNING: don't run with debug turned on in production!
 DEBUG = True
 
-ALLOWED_HOSTS = []
+ALLOWED_HOSTS = ['trello-clone-c2mj.onrender.com']
 
 
 # Application definition
