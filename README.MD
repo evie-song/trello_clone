@@ -19,4 +19,10 @@ this clone app resembles the ui design of the workflow app `trello.com` and incu
 3. drag and drop lists and cards
 4. on cards, add descriptions, assign members, attach labels, create checklist and assign due dates
 
+Feel free to reach out to me with any questions at evie.shuangsong@gmail.com
+
+Below are a few screenshots.
+
 This app is still a work in progress, but thanks for taking a look!
+
+![screenshot 1](https://github.com/evie-song/trello_clone/static/screenshots/Screen%20Shot%201.png?raw=true)
