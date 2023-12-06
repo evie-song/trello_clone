@@ -25,4 +25,8 @@ Below are a few screenshots.
 
 This app is still a work in progress, but thanks for taking a look!
 
-![screenshot 1](https://github.com/evie-song/trello_clone/static/screenshots/Screen%20Shot%201.png?raw=true)
+![screenshot 1](https://github.com/evie-song/trello_clone/blob/master/static/screenshots/Screen%20Shot%201.png?raw=true)
+
+![screenshot 2](https://github.com/evie-song/trello_clone/blob/master/static/screenshots/Screen%20Shot%202.png?raw=true)
+
+![screenshot 3](https://github.com/evie-song/trello_clone/blob/master/static/screenshots/Screen%20Shot%203.png?raw=true)
