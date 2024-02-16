@@ -210,6 +210,13 @@ $(document).ready(function () {
   // close new list form by clicking close button.
   $(document).on("click", ".new-list-clear-icon", closeNewListForm);
 
+  // click enter to submit a checklist item.
+  $(document).on("keydown", ".checklist-item-input-box", (e) => {
+    if (e.keyCode == 13) {
+      $(".checklist-item-form").submit();
+    }
+  });
+
   // Show and hide new checklist item form.
   $(document).on("click", ".add-new-checklist-item-btn", function () {
     const $checklistItemComposer = $(this);
@@ -270,9 +277,10 @@ $(document).ready(function () {
     }
   );
 
-  $(document).on("click", ".description-control", function () {
+  // helper method to change the description textarea to view mode.
+  const setDescriptionToView = () => {
     const descriptionInputBox = $(".description-input-box");
-
+    descriptionInputBox.blur();
     if ($(".description-input-box").val().length == 0) {
       $(".description-footer").slideUp(50);
       descriptionInputBox.css({
@@ -289,6 +297,22 @@ $(document).ready(function () {
         height: "initial",
       });
     }
+  };
+
+  // set description textarea to view mode when press enter while eidting the description
+  // $(document).on(
+  //   "keydown",
+  //   ".description-input-box",
+  //   (e) => {
+  //     if (e.keyCode == 13) {
+  //       setDescriptionToView();
+  //     }
+  //   }
+  // );
+
+  // set description textarea to view mode when click save or close
+  $(document).on("click", ".description-control", function () {
+    setDescriptionToView();
   });
 
   // update the checklist bar based on state of checkboxes.
@@ -1404,14 +1428,14 @@ $(document).ready(function () {
       ) {
         closeNewCardForm();
       } else {
-        $(".new-card-form:visible").each(function(){
+        $(".new-card-form:visible").each(function () {
           const $currentForm = $(this);
           const $currentFormCardComposer = $currentForm.siblings(
             ".open-card-composer"
           );
           if (
             !$(e.target).closest($currentFormCardComposer).length &&
-            !$currentFormCardComposer.is(e.target) 
+            !$currentFormCardComposer.is(e.target)
           ) {
             $currentForm.hide();
             $currentFormCardComposer.show();
@@ -1420,5 +1444,44 @@ $(document).ready(function () {
       }
     }
 
+    // close any popup window when clicking else where
+    if (
+      $(".pop-over:visible").length > 0 &&
+      !$(e.target).closest(".pop-over").length &&
+      !$(".pop-over").is(e.target)
+    ) {
+      $(".pop-over").hide();
+    }
+
+    // // close the checklist form when clcik outside of the form
+    // if (
+    //   $(".checklist-item-form:visible").length > 0 &&
+    //   !$(e.target).closest(".checklist-item-form").length &&
+    //   !$(".checklist-item-form").is(e.target) &&
+    //   !$(e.target).closest(".add-new-checklist-item-btn").length &&
+    //   !$(".add-new-checklist-item-btn").is(e.target)
+    // ) {
+    //   $(".add-new-checklist-item-btn").show();
+    //   $(".checklist-item-form").hide();
+    // }
+
+		// if (
+    //   $(".description-input-box:focus").length > 0 ) {
+		// 		console.log("test3");
+		// 	}
+
+    // if (!$(e.target).closest(".card-description-form").length &&
+		// !$(".card-description-form").is(e.target)) {
+    //   console.log('test')
+    // }
+    // // set the description to view when click else where
+    // if (
+    //   $(".description-input-box:focus").length > 0 &&
+    //   !$(e.target).closest(".card-description-form").length &&
+    //   !$(".card-description-form").is(e.target)
+    // ) {
+    //   console.log("test2");
+    //   // setDescriptionToView();
+    // }
   });
 });
