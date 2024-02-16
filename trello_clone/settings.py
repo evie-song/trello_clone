@@ -25,7 +25,7 @@ SECRET_KEY = 'django-insecure-ug)-tvl)8ftv!x!v!uu=(k5oy3_bu=ppp6bmg5uyjn)+3xwd+c
 # SECURITY WARNING: don't run with debug turned on in production!
 DEBUG = True
 
-ALLOWED_HOSTS = ['trello-clone-c2mj.onrender.com','127.0.0.1', 'localhost']
+ALLOWED_HOSTS = ['trello-clone-c2mj.onrender.com','127.0.0.1', 'localhost', ' django-env.eba-u2iceqbc.us-east-2.elasticbeanstalk.com']
 
 
 # Application definition
@@ -83,12 +83,26 @@ WSGI_APPLICATION = 'trello_clone.wsgi.application'
 # Database
 # https://docs.djangoproject.com/en/4.0/ref/settings/#databases
 
-DATABASES = {
-    'default': {
-        'ENGINE': 'django.db.backends.sqlite3',
-        'NAME': BASE_DIR / 'db.sqlite3',
+
+if 'RDS_HOSTNAME' in os.environ:
+    DATABASES = {
+        'default': {
+            'ENGINE': 'django.db.backends.mysql',
+            'NAME': os.environ['RDS_DB_NAME'],
+            'USER': os.environ['RDS_USERNAME'],
+            'PASSWORD': os.environ['RDS_PASSWORD'],
+            'HOST': os.environ['RDS_HOSTNAME'],
+            'PORT': os.environ['RDS_PORT'],
+        }
     }
-}
+else: 
+    DATABASES = {
+        'default': {
+            'ENGINE': 'django.db.backends.sqlite3',
+            'NAME': BASE_DIR / 'db.sqlite3',
+        }
+    }
+
 
 
 # Password validation
