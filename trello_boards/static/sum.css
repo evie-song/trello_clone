@@ -1696,6 +1696,16 @@ ul.edit-label-pop-over {
     margin: 20px 0;
 }
 
+.test-login-wrapper {
+	text-align: center;
+	padding: 8px 6px;
+}
+
+.test-login {
+	color: rgb(0, 82, 204);
+	cursor: pointer;
+}
+
 .edit-label-name {
 	cursor: pointer;
 }

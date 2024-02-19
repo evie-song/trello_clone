@@ -598,7 +598,6 @@ $(document).ready(function () {
     "click",
     ".member-icon.account-menu, .new-board-menu, .list-header-icon, .board-menu",
     function (event) {
-      console.log("test");
       event.preventDefault();
       const $btnSelected = $(this);
       const csrftoken = getCookie("csrftoken");
@@ -618,7 +617,7 @@ $(document).ready(function () {
 
       let url, data;
       const userId = $(this).siblings("input[name=user_id]").val();
-      console.log(positionLeft, positionTop);
+      // console.log(positionLeft, positionTop);
 
       if ($btnSelected.hasClass("account-menu")) {
         url = "render_pop_over_account";
@@ -1467,12 +1466,17 @@ $(document).ready(function () {
 
     // set the description to view when click else where
     if (
-      $(".description-input-box:focus").css("background-color") != "rgb(255, 255, 255)" &&
+      $(".description-input-box").css("background-color") == "rgb(255, 255, 255)" &&
       !$(e.target).closest(".card-description-form").length &&
       !$(".card-description-form").is(e.target)
     ) {
-      console.log("test2");
       setDescriptionToView();
     }
   });
+
+	// populate test account credentials on the login page
+	$(document).on("click", "#test-login-btn", () => {
+		$('input[name="username"]').val("testuser1");
+		$('input[name="password"]').val("Test@ccount")
+	})
 });

@@ -2,7 +2,7 @@
 
 this repo is a clone of trello I made to learn and practice python/django
 
-this app is hosted on render.com at following url `https://trello-clone-c2mj.onrender.com/`, feel free to give it a try. Please note the initial load of the app may be very slow. Note this app uses a sqlite DB and your data may be lost if I re-deploy. 
+this app is hosted on render.com at following url `https://trello-clone-c2mj.onrender.com/`, feel free to give it a try. note the initial load of the app may be very slow. this app uses a sqlite DB so your data may be lost if I re-deploy. 
 
 to run the app locally, follow below steps:
 
