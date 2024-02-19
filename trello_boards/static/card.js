@@ -1454,34 +1454,25 @@ $(document).ready(function () {
     }
 
     // // close the checklist form when clcik outside of the form
-    // if (
-    //   $(".checklist-item-form:visible").length > 0 &&
-    //   !$(e.target).closest(".checklist-item-form").length &&
-    //   !$(".checklist-item-form").is(e.target) &&
-    //   !$(e.target).closest(".add-new-checklist-item-btn").length &&
-    //   !$(".add-new-checklist-item-btn").is(e.target)
-    // ) {
-    //   $(".add-new-checklist-item-btn").show();
-    //   $(".checklist-item-form").hide();
-    // }
+    if (
+      $(".checklist-item-form:visible").length > 0 &&
+      !$(e.target).closest(".checklist-item-form").length &&
+      !$(".checklist-item-form").is(e.target) &&
+      !$(e.target).closest(".add-new-checklist-item-btn").length &&
+      !$(".add-new-checklist-item-btn").is(e.target)
+    ) {
+      $(".add-new-checklist-item-btn").show();
+      $(".checklist-item-form").hide();
+    }
 
-		// if (
-    //   $(".description-input-box:focus").length > 0 ) {
-		// 		console.log("test3");
-		// 	}
-
-    // if (!$(e.target).closest(".card-description-form").length &&
-		// !$(".card-description-form").is(e.target)) {
-    //   console.log('test')
-    // }
-    // // set the description to view when click else where
-    // if (
-    //   $(".description-input-box:focus").length > 0 &&
-    //   !$(e.target).closest(".card-description-form").length &&
-    //   !$(".card-description-form").is(e.target)
-    // ) {
-    //   console.log("test2");
-    //   // setDescriptionToView();
-    // }
+    // set the description to view when click else where
+    if (
+      $(".description-input-box:focus").css("background-color") != "rgb(255, 255, 255)" &&
+      !$(e.target).closest(".card-description-form").length &&
+      !$(".card-description-form").is(e.target)
+    ) {
+      console.log("test2");
+      setDescriptionToView();
+    }
   });
 });
